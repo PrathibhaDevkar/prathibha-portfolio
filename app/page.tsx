@@ -18,14 +18,14 @@ export default function Home() {
         {/* Refined Hero Section with CTA */}
         <header className="mb-24">
           <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-6">
-            Available for Summer 2026 Roles
+            Available for Full time Roles
           </div>
           <h1 className="text-6xl font-extrabold text-white mb-6 tracking-tight">
             Rajendran Prathibha Devkar
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mb-10">
             Software Engineer with <span className="text-white font-medium">4+ years of production experience</span>. 
-            Currently pursuing an MSCS at <span className="text-blue-400 font-semibold">UT Arlington</span>[cite: 3, 28].
+            Currently pursuing an MSCS at <span className="text-blue-400 font-semibold">UT Arlington</span>.
           </p>
           
           <div className="flex flex-wrap gap-4">
