@@ -1,38 +1,84 @@
-import {Project } from "../data/projects"; 
+"use client";
+import { motion } from "framer-motion";
+import { Project } from "../data/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="group relative rounded-2xl border border-slate-800 bg-slate-900/40 p-8 transition-all duration-300 hover:border-blue-500/50 hover:bg-slate-900/60 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.2)]">
-      {/* Decorative Gradient Glow on Hover */}
-      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="group relative rounded-2xl border border-slate-800 bg-slate-900/40 p-8 transition-colors duration-300 hover:border-blue-500/50 hover:bg-slate-900/60 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.25)] flex flex-col"
+    >
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-6">
-          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
+          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 pr-4">
             {project.title}
           </h3>
           {project.stats && (
-            <span className="text-[10px] font-mono font-bold tracking-wider bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full border border-blue-500/20 uppercase">
+            <span className="shrink-0 text-[10px] font-mono font-bold tracking-wider bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full border border-blue-500/20 uppercase">
               {project.stats}
             </span>
           )}
         </div>
 
-        <p className="text-slate-400 text-sm leading-relaxed mb-8">
+        <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mt-auto">
+        <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map((tag: string) => (
-            <span 
-              key={tag} 
+            <span
+              key={tag}
               className="text-[9px] uppercase tracking-widest font-bold bg-slate-800/80 text-slate-400 px-2.5 py-1 rounded-md border border-slate-700/50 group-hover:border-slate-600 group-hover:text-slate-200 transition-all"
             >
               {tag}
             </span>
           ))}
         </div>
+
+        {(project.githubLink || project.liveLink) && (
+          <div className="flex gap-3 pt-2 border-t border-slate-800">
+            {project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors font-medium"
+              >
+                <GitHubIcon />
+                View Code
+              </a>
+            )}
+            {project.liveLink && (
+              <a
+                href={project.liveLink}
+                target="_blank"
+                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors font-medium"
+              >
+                <ExternalLinkIcon />
+                Live Demo
+              </a>
+            )}
+          </div>
+        )}
       </div>
-    </div>
+    </motion.div>
+  );
+}
+
+function GitHubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+    </svg>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current fill-none" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
   );
 }

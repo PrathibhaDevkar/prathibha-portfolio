@@ -1,10 +1,10 @@
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 export const metadata = {
+  metadataBase: new URL("https://prathibhadevkar.dev"),
   title: "Rajendran Prathibha Devkar | Software Engineer",
-  description: "MSCS Student at UT Arlington with 4+ years of experience in Full-Stack and AI/ML.",
+  description: "MSCS Graduate from UT Arlington with 4+ years of experience in Full-Stack and AI/ML.",
   openGraph: {
     title: "Prathibha Devkar Portfolio",
     description: "Applied AI and Robust Software Engineering",
@@ -21,7 +21,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 
 export default function RootLayout({
   children,

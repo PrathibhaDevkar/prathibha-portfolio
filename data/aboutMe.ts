@@ -1,9 +1,9 @@
 // data/about.ts
 export const aboutMe = {
-  title: "Software Engineer & MSCS Candidate",
+  title: "Software Engineer & MSCS Graduate",
   description: [
-    "I am a Software Engineer with over 4 years of production experience spanning full-stack systems (TypeScript, C#, Python, .NET) and applied Machine Learning. My expertise includes architecting scalable applications, such as a React Native curbside pickup system that improved user satisfaction by 40%.",
-    "Currently, I am an MSCS candidate at the University of Texas at Arlington, where I specialize in the intersection of applied AI and robust software engineering. As a published researcher, I have developed CNN-based systems for hand gesture recognition and high-accuracy medical imaging pipelines.",
-    "I have a proven track record of maintaining 98% system uptime and delivering 40+ production fixes for enterprise-level platforms. I am passionate about building reliable, high-throughput systems that solve complex real-world challenges."
+    "I've spent the last four years building software that people actually use. Fixing the bugs that slip through, shipping the features that matter, and learning something new on almost every project. I care a lot about getting the details right.",
+    "I recently graduated with my Master's in Computer Science from UT Arlington, where I got to dig deeper into AI and machine learning, areas I've always been curious about. I've published research on using computer vision to help people who can't speak communicate through hand gestures, which is one of the projects I'm most proud of.",
+    "Outside of work and school, I'm the kind of person who gets genuinely excited about a tricky problem. I like understanding how things work under the hood, and I find the most satisfaction in building something that just works, reliably and without drama."
   ]
 };

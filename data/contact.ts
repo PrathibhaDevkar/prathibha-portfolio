@@ -1,7 +1,7 @@
-// data/contact.ts
 export const contactLinks = {
   email: "prathibhadevkar@gmail.com",
-  linkedin: "https://linkedin.com/in/prathibha-devkar-3096", // Add your GitHub username here
+  linkedin: "https://linkedin.com/in/prathibha-devkar-3096",
+  github: "https://github.com/PrathibhaDevkar",
   location: "Dallas, TX",
-  resumeLink: "/Prathibha_Devkar_Resume.pdf" // Place your PDF in the 'public' folder
+  resumeLink: "/Prathibha_Devkar_Resume.pdf"
 };
