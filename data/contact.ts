@@ -3,5 +3,5 @@ export const contactLinks = {
   linkedin: "https://linkedin.com/in/prathibha-devkar-3096",
   github: "https://github.com/PrathibhaDevkar",
   location: "Dallas, TX",
-  resumeLink: "/RPD_SWE.pdf"
+  resumeLink: "/RPD_AIML.pdf"
 };
