@@ -51,14 +51,7 @@ export default function HeroSection() {
               target="_blank"
               className="px-5 py-2.5 bg-term-accent hover:brightness-110 text-black font-bold rounded-md transition-all text-sm"
             >
-              ./resume --swe
-            </a>
-            <a
-              href={contactLinks.resumeLinkAiml}
-              target="_blank"
-              className="px-5 py-2.5 border border-term-border hover:border-term-accent/50 hover:text-term-accent text-term-muted rounded-md transition-all text-sm"
-            >
-              ./resume --aiml
+              ./resume
             </a>
             <a
               href="#projects"
