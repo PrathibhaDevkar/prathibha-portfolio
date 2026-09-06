@@ -2,7 +2,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 export const metadata = {
-  metadataBase: new URL("https://prathibhadevkar.dev"),
+  metadataBase: new URL("https://prathibha-portfolio-nj72.vercel.app"),
   title: "Rajendran Prathibha Devkar | Software Engineer",
   description: "MSCS Graduate from UT Arlington with 4+ years of experience in Full-Stack and AI/ML.",
   openGraph: {
