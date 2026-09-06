@@ -1,14 +1,34 @@
 export const skillCategories = [
   {
     title: "Languages",
-    skills: ["Python", "TypeScript", "C#", "Java", "C/C++", "JavaScript"]
+    skills: ["Python", "TypeScript", "JavaScript", "C#"]
   },
   {
-    title: "AI & Machine Learning",
-    skills: ["PyTorch", "TensorFlow", "YOLOv8", "RAG", "LangChain", "OpenCV"]
+    title: "Machine Learning",
+    skills: ["PyTorch", "TensorFlow", "Keras", "OpenCV", "NumPy", "Pandas", "CNN"]
   },
   {
-    title: "Frontend & Backend",
-    skills: ["React", "Aurelia", ".NET", "Node.js", "PostgreSQL", "D3.js"]
+    title: "AI / LLM",
+    skills: ["Ollama", "Prompt Engineering", "DistilBERT Fine-Tuning", "LLM Evaluation & Calibration"]
+  },
+  {
+    title: "Backend / APIs",
+    skills: ["ASP.NET", "Node.js", "FastAPI", "RESTful APIs"]
+  },
+  {
+    title: "Frontend",
+    skills: ["React", "React Native", "Aurelia", "D3.js", "HTML5", "CSS3"]
+  },
+  {
+    title: "Databases",
+    skills: ["SQL Server", "PostgreSQL", "MySQL"]
+  },
+  {
+    title: "Cloud",
+    skills: ["AWS", "GCP"]
+  },
+  {
+    title: "DevOps / Tools",
+    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker"]
   }
 ];

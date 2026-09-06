@@ -4,75 +4,78 @@ import { contactLinks } from "../data/contact";
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 export default function HeroSection() {
   return (
-    <motion.header
-      className="mb-24"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
-      {/* RPD Avatar */}
-      <motion.div variants={item} className="mb-8">
-        <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white text-xl font-extrabold tracking-tight select-none shadow-[0_0_40px_-8px_rgba(59,130,246,0.6)]">
-          RPD
-          <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-slate-950 shadow" title="Available" />
-        </div>
-      </motion.div>
-
-      <motion.div variants={item}>
-        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-6">
-          Available for Full-time Roles
-        </div>
-      </motion.div>
-
-      <motion.h1
+    <motion.header className="mb-24" variants={container} initial="hidden" animate="show">
+      <motion.div
         variants={item}
-        className="text-6xl font-extrabold text-white mb-6 tracking-tight"
+        className="rounded-xl border border-term-border bg-term-panel overflow-hidden shadow-2xl shadow-black/40"
       >
-        Rajendran Prathibha Devkar
-      </motion.h1>
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-term-border bg-term-panel-2">
+          <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+          <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+          <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+          <span className="ml-3 text-xs text-term-dim">prathibha@portfolio — zsh</span>
+        </div>
 
-      <motion.p
-        variants={item}
-        className="text-xl text-slate-400 max-w-2xl leading-relaxed mb-10"
-      >
-        Software Engineer with{" "}
-        <span className="text-white font-medium">4+ years of production experience</span>.
-        MSCS graduate from{" "}
-        <span className="text-blue-400 font-semibold">UT Arlington</span>.
-      </motion.p>
+        <div className="p-8 md:p-10">
+          <p className="text-term-green text-sm mb-3">
+            <span className="text-term-dim">$</span> whoami
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-term-text mb-5 tracking-tight">
+            Rajendran Prathibha Devkar
+          </h1>
+          <p className="text-term-muted text-lg leading-relaxed mb-2 max-w-2xl">
+            <span className="text-term-accent">&gt;</span> Software Engineer — 4+ years shipping production ML systems &amp; full-stack applications
+          </p>
+          <p className="text-term-muted text-lg leading-relaxed mb-8 max-w-2xl">
+            <span className="text-term-accent">&gt;</span> MSCS, University of Texas at Arlington
+          </p>
 
-      <motion.div variants={item} className="flex flex-wrap gap-4">
-        <a
-          href={contactLinks.resumeLink}
-          target="_blank"
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/20"
-        >
-          Download Resume
-        </a>
-        <a
-          href="#projects"
-          className="px-6 py-3 border border-slate-700 hover:border-slate-500 text-slate-300 rounded-lg transition-all"
-        >
-          View Projects
-        </a>
-        <a
-          href={contactLinks.github}
-          target="_blank"
-          className="px-6 py-3 border border-slate-700 hover:border-blue-500/50 hover:text-blue-400 text-slate-300 rounded-lg transition-all flex items-center gap-2"
-        >
-          <GitHubIcon />
-          GitHub
-        </a>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-term-green-dim border border-term-green/30 text-term-green text-xs mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-term-green animate-pulse" />
+            available for full-time roles
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={contactLinks.resumeLink}
+              target="_blank"
+              className="px-5 py-2.5 bg-term-accent hover:brightness-110 text-black font-bold rounded-md transition-all text-sm"
+            >
+              ./resume --swe
+            </a>
+            <a
+              href={contactLinks.resumeLinkAiml}
+              target="_blank"
+              className="px-5 py-2.5 border border-term-border hover:border-term-accent/50 hover:text-term-accent text-term-muted rounded-md transition-all text-sm"
+            >
+              ./resume --aiml
+            </a>
+            <a
+              href="#projects"
+              className="px-5 py-2.5 border border-term-border hover:border-term-green/50 hover:text-term-green text-term-muted rounded-md transition-all text-sm"
+            >
+              cd ./projects
+            </a>
+            <a
+              href={contactLinks.github}
+              target="_blank"
+              className="px-5 py-2.5 border border-term-border hover:border-term-text/50 hover:text-term-text text-term-muted rounded-md transition-all text-sm flex items-center gap-2"
+            >
+              <GitHubIcon />
+              github
+            </a>
+          </div>
+        </div>
       </motion.div>
     </motion.header>
   );

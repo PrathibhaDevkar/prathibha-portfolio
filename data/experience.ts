@@ -1,28 +1,36 @@
 // data/experience.ts
 export const experiences = [
   {
-    company: "Board Americas",
-    role: "QA / Software Developer Intern",
-    period: "May 2025 - March 2026",
-    location: "Remote (USA)",
+    company: "SEAR Lab, UT Arlington",
+    role: "Research Assistant",
+    period: "Apr 2026 - Present",
+    location: "Arlington, TX",
     description: [
-      "Accelerated platform stability by delivering 40+ production fixes for an enterprise forecasting platform using Aurelia (TypeScript) and C#, directly reducing post-release hot fixes.",
-      "Resolved critical D3.js rendering defects involving fiscal/calendar year logic and axis precision to enhance data integrity in customer-facing analytics.",
-      "Re-engineered Workbench modules and resolved favorites cache invalidation issues, eliminating stale session states and improving real-time synchronization for concurrent users.",
-      "Troubleshot cross-layer issues spanning UI state and backend locking flows while partnering with senior engineers through peer code reviews."
+      "Refactored a 6-service Docker stack (Mosquitto MQTT, InfluxDB, Grafana, a FastAPI Data Hub, Python collectors) into a single self-contained FastAPI application with an embedded dashboard, eliminating the Docker/Grafana/MQTT infrastructure dependency entirely.",
+      "Integrated live telemetry from three hardware APIs — LG ThinQ (AC), Rheem EcoNet (water heater), and Enphase (solar) — into a unified REST API computing a real-time Net Load metric (solar minus HVAC/HWH draw), via a background asyncio collector refreshing every 60 seconds."
     ]
   },
   {
-    company: "Infosys Pvt. Ltd.",
+    company: "Board Americas",
+    role: "Software Developer Intern",
+    period: "May 2025 - Mar 2026",
+    location: "Remote, Texas",
+    description: [
+      "Resolved 45+ medium-to-high severity production bugs over 11 months across an enterprise forecasting platform (Aurelia/TypeScript, C#), improving platform stability across UI, state management, and backend API layers.",
+      "Diagnosed and fixed critical D3.js charting bugs, including fiscal-year x-axis display errors and incorrect actual-vs-forecast rendering, correcting chart data clients relied on for business decisions.",
+      "Fixed a company-wide cache-invalidation bug that let forecast data drift out of sync across users, by changing invalidation scope from per-user to per-company; also resolved a null-date bug across all datepicker components that was triggering 500 errors in production."
+    ]
+  },
+  {
+    company: "Infosys Private Ltd.",
     role: "Technology Analyst",
     period: "Oct 2019 - Nov 2022",
-    location: "Kerala, India",
+    location: "Trivandrum, India",
     description: [
-      "Architected a React Native curbside pickup application that streamlined end-to-end ordering, improving user satisfaction by 40%.",
-      "Scaled e-learning platform capacity to support 1,000+ concurrent users by maintaining high-throughput RESTful APIs for session management.",
-      "Reduced data retrieval latency by 40% through SQL query optimization and relational schema re-engineering while maintaining 100% data integrity.",
-      "Boosted application performance by 20% using JMeter load tests to identify and resolve architectural bottlenecks prior to multi-server rollouts.",
-      "Eliminated critical production crashes by resolving race conditions in Calendar API integrations, significantly improving system reliability under heavy usage."
+      "Developed React Native UI and integrated backend APIs for a curbside-pickup feature added to the Tractor Supply Company mobile app, improving user satisfaction by 30% based on pilot-release feedback.",
+      "Built RESTful APIs in Node.js for an e-learning platform supporting 200+ concurrent users across student, teacher, and admin roles, enabling real-time session scheduling, participation, and new-user registration.",
+      "Designed PostgreSQL schemas and optimized SQL queries for the platform; built a JMeter load-testing pipeline simulating 1K-10K virtual users, which identified and resolved a calendar API bottleneck for a team-reported 40% improvement in data-retrieval speed.",
+      "Deployed the platform to live servers via PuTTY/WinSCP and managed process reliability with PM2, ensuring stable delivery across environments."
     ]
   }
 ];

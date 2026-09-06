@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SectionHeading from "./SectionHeading";
 
 interface FormState {
   name: string;
@@ -25,27 +26,24 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    "w-full rounded-lg bg-slate-900 border border-slate-800 text-slate-200 placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-blue-500/60 focus:ring-1 focus:ring-blue-500/30 transition-all";
+    "w-full rounded-md bg-term-panel-2 border border-term-border text-term-text placeholder-term-dim px-4 py-3 text-sm focus:outline-none focus:border-term-accent/60 focus:ring-1 focus:ring-term-accent/30 transition-all font-mono";
 
   return (
     <section id="contact" className="my-24 scroll-mt-20">
-      <h2 className="text-3xl font-bold text-white mb-12 flex items-center gap-4">
-        Get In Touch
-        <div className="h-px bg-slate-800 grow" />
-      </h2>
+      <SectionHeading command="mail -s 'hello'" title="Get In Touch" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        <div className="space-y-4">
-          <p className="text-slate-400 leading-relaxed">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="space-y-4 rounded-xl border border-term-border bg-term-panel p-6 md:p-8">
+          <p className="text-term-muted leading-relaxed text-sm">
             I&apos;m currently open to full-time software engineering roles. Whether you have a project in
             mind, a question, or just want to say hi, my inbox is open.
           </p>
           <div className="space-y-3 pt-2">
             <a
               href="mailto:prathibhadevkar@gmail.com"
-              className="flex items-center gap-3 text-sm text-slate-400 hover:text-blue-400 transition-colors group"
+              className="flex items-center gap-3 text-sm text-term-muted hover:text-term-accent transition-colors group"
             >
-              <span className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 group-hover:border-blue-500/40 flex items-center justify-center transition-colors">
+              <span className="w-8 h-8 rounded-md bg-term-panel-2 border border-term-border group-hover:border-term-accent/40 flex items-center justify-center transition-colors">
                 <MailIcon />
               </span>
               prathibhadevkar@gmail.com
@@ -53,9 +51,9 @@ export default function ContactForm() {
             <a
               href="https://linkedin.com/in/prathibha-devkar-3096"
               target="_blank"
-              className="flex items-center gap-3 text-sm text-slate-400 hover:text-blue-400 transition-colors group"
+              className="flex items-center gap-3 text-sm text-term-muted hover:text-term-accent transition-colors group"
             >
-              <span className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 group-hover:border-blue-500/40 flex items-center justify-center transition-colors">
+              <span className="w-8 h-8 rounded-md bg-term-panel-2 border border-term-border group-hover:border-term-accent/40 flex items-center justify-center transition-colors">
                 <LinkedInIcon />
               </span>
               LinkedIn
@@ -69,11 +67,11 @@ export default function ContactForm() {
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 text-center"
+              className="p-8 rounded-xl border border-term-green/30 bg-term-green-dim text-center"
             >
-              <div className="text-4xl mb-4">✓</div>
-              <p className="text-white font-semibold mb-1">Message prepared!</p>
-              <p className="text-sm text-slate-400">Your mail client should have opened. Thanks for reaching out.</p>
+              <div className="text-term-green text-4xl mb-4">✓</div>
+              <p className="text-term-text font-semibold mb-1">Message prepared!</p>
+              <p className="text-sm text-term-muted">Your mail client should have opened. Thanks for reaching out.</p>
             </motion.div>
           ) : (
             <motion.form
@@ -87,7 +85,7 @@ export default function ContactForm() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Your name"
+                placeholder="your_name"
                 required
                 className={inputClass}
               />
@@ -104,7 +102,7 @@ export default function ContactForm() {
                 name="message"
                 value={form.message}
                 onChange={handleChange}
-                placeholder="What's on your mind?"
+                placeholder="message.txt"
                 required
                 rows={5}
                 className={`${inputClass} resize-none`}
@@ -113,9 +111,9 @@ export default function ContactForm() {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-colors shadow-lg shadow-blue-500/20"
+                className="w-full py-3 bg-term-accent hover:brightness-110 text-black font-bold rounded-md transition-colors"
               >
-                Send Message
+                ./send --message
               </motion.button>
             </motion.form>
           )}

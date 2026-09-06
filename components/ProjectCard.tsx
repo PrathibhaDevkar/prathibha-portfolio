@@ -7,23 +7,25 @@ export default function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="group relative rounded-2xl border border-slate-800 bg-slate-900/40 p-8 transition-colors duration-300 hover:border-blue-500/50 hover:bg-slate-900/60 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.25)] flex flex-col"
+      className="group relative rounded-xl border border-term-border bg-term-panel overflow-hidden flex flex-col hover:border-term-accent/40 transition-colors duration-300"
     >
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-term-border bg-term-panel-2">
+        <span className="text-xs text-term-dim truncate">
+          ~/{project.title.toLowerCase().replace(/[^a-z0-9]+/g, "_")}
+        </span>
+        {project.stats && (
+          <span className="shrink-0 text-[10px] font-bold tracking-wider bg-term-accent-dim text-term-accent px-2 py-0.5 rounded border border-term-accent/30 uppercase">
+            {project.stats}
+          </span>
+        )}
+      </div>
 
-      <div className="relative z-10 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-6">
-          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 pr-4">
-            {project.title}
-          </h3>
-          {project.stats && (
-            <span className="shrink-0 text-[10px] font-mono font-bold tracking-wider bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full border border-blue-500/20 uppercase">
-              {project.stats}
-            </span>
-          )}
-        </div>
+      <div className="relative z-10 flex flex-col h-full p-6">
+        <h3 className="text-lg font-bold text-term-text group-hover:text-term-accent transition-colors duration-300 mb-3">
+          {project.title}
+        </h3>
 
-        <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-term-muted text-sm leading-relaxed mb-6 flex-grow">
           {project.description}
         </p>
 
@@ -31,7 +33,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.tags.map((tag: string) => (
             <span
               key={tag}
-              className="text-[9px] uppercase tracking-widest font-bold bg-slate-800/80 text-slate-400 px-2.5 py-1 rounded-md border border-slate-700/50 group-hover:border-slate-600 group-hover:text-slate-200 transition-all"
+              className="text-[10px] font-bold text-term-green bg-term-green-dim px-2 py-1 rounded border border-term-green/20"
             >
               {tag}
             </span>
@@ -39,25 +41,25 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {(project.githubLink || project.liveLink) && (
-          <div className="flex gap-3 pt-2 border-t border-slate-800">
+          <div className="flex gap-4 pt-4 border-t border-term-border text-xs">
             {project.githubLink && (
               <a
                 href={project.githubLink}
                 target="_blank"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors font-medium"
+                className="flex items-center gap-1.5 text-term-muted hover:text-term-accent transition-colors font-medium"
               >
                 <GitHubIcon />
-                View Code
+                view code
               </a>
             )}
             {project.liveLink && (
               <a
                 href={project.liveLink}
                 target="_blank"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors font-medium"
+                className="flex items-center gap-1.5 text-term-muted hover:text-term-accent transition-colors font-medium"
               >
                 <ExternalLinkIcon />
-                Live Demo
+                live demo
               </a>
             )}
           </div>

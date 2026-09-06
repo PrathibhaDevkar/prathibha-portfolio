@@ -8,11 +8,12 @@ import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
 import AnimatedSection from "../components/AnimatedSection";
 import ContactForm from "../components/ContactForm";
+import SectionHeading from "../components/SectionHeading";
 import { project } from "../data/projects";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+    <main className="min-h-screen bg-term-bg text-term-text selection:bg-term-accent-dim">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-8 pt-32">
@@ -25,11 +26,8 @@ export default function Home() {
 
         <AnimatedSection delay={0.05}>
           <section id="projects" className="my-24 scroll-mt-20">
-            <h2 className="text-3xl font-bold text-white mb-12 flex items-center gap-4">
-              Selected Projects
-              <div className="h-px bg-slate-800 grow" />
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <SectionHeading command="ls -la projects/" title="Selected Projects" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.map((p) => (
                 <ProjectCard key={p.title} project={p} />
               ))}

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { contactLinks } from "../data/contact";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "about" },
+  { href: "#projects", label: "projects" },
+  { href: "#skills", label: "skills" },
+  { href: "#experience", label: "experience" },
+  { href: "#contact", label: "contact" },
 ];
 
 const sectionIds = ["about", "projects", "skills", "publications", "experience", "contact"];
@@ -34,12 +34,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
-        <a href="#" className="font-bold tracking-tighter text-blue-400 hover:text-blue-300 transition-colors">
-          RPD.DEV
+    <nav className="fixed top-0 w-full z-50 border-b border-term-border bg-term-bg/85 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between text-sm">
+        <a href="#" className="font-bold tracking-tight text-term-text hover:text-term-accent transition-colors flex items-center gap-1.5">
+          <span className="text-term-green">~/</span>
+          <span>portfolio</span>
+          <span className="text-term-accent cursor-blink">_</span>
         </a>
-        <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
+        <div className="flex items-center gap-1 text-term-muted">
           {navLinks.map(({ href, label }) => {
             const id = href.replace("#", "");
             const isActive = active === id;
@@ -47,8 +49,11 @@ export default function Navbar() {
               <a
                 key={href}
                 href={href}
-                className={`transition-colors hover:text-white ${isActive ? "text-blue-400" : ""}`}
+                className={`px-3 py-1.5 rounded-md transition-colors hover:text-term-text hover:bg-term-panel ${
+                  isActive ? "text-term-accent bg-term-panel" : ""
+                }`}
               >
+                <span className="text-term-dim">./</span>
                 {label}
               </a>
             );
@@ -57,7 +62,7 @@ export default function Navbar() {
             href={contactLinks.github}
             target="_blank"
             aria-label="GitHub"
-            className="hover:text-white transition-colors"
+            className="ml-2 p-2 rounded-md text-term-muted hover:text-term-text hover:bg-term-panel transition-colors"
           >
             <GitHubIcon />
           </a>
