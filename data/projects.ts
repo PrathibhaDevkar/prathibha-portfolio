@@ -17,10 +17,17 @@ export const project: Project[] = [
   },
   {
     title: "Confidence-Aware Meeting Intelligence",
-    description: "Built a meeting summarizer and action-item extractor that scores the reliability of each output instead of presenting everything with equal certainty. A local LLM (Ollama, llama3.2:3b) extracts summaries and action items, independently cross-checked by a fine-tuned DistilBERT classifier; a calibrated confidence score (logistic regression on quote-grounding, owner-attribution plausibility, cross-model agreement, and self-reported confidence) was trained on 228 hand-labeled examples.",
+    description: "Built a meeting summarizer and action-item extractor that scores the reliability of each output instead of presenting everything with equal certainty. A local LLM (Ollama, llama3.2:3b) extracts summaries and action items, independently cross-checked by a fine-tuned DistilBERT classifier; a calibrated confidence score (logistic regression on quote-grounding, owner-attribution plausibility, cross-model agreement, and self-reported confidence) was trained on 228 hand-labeled examples. The confidence layer has since been extracted into a standalone, reusable package — see confidence-referee below.",
     tags: ["Python", "Ollama", "DistilBERT", "Streamlit"],
     stats: "58% vs 16% Precision",
     githubLink: "https://github.com/PrathibhaDevkar/confidence-aware-meeting-intelligence"
+  },
+  {
+    title: "confidence-referee",
+    description: "Extracted the confidence-calibration layer out of the meeting-intelligence project into a standalone, reusable Python package: domain-agnostic signals (grounding, cross-model agreement, self-reported confidence, an optional domain validator) calibrated per-domain via logistic regression. Validated the abstraction actually generalizes — not just in theory — on a second, unrelated domain: RAG-answer hallucination detection on HaluEval, using one signal alone, completely unmodified.",
+    tags: ["Python", "scikit-learn", "Library Design", "CI/CD"],
+    stats: "0.97 AUC, 2nd Domain",
+    githubLink: "https://github.com/PrathibhaDevkar/confidence-referee"
   },
   {
     title: "Apex F1 Predictor",
