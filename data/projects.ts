@@ -34,6 +34,7 @@ export const project: Project[] = [
     description: "Full-stack ML app forecasting Formula 1 race outcomes from historical race data (2023+) with a RandomForestClassifier and a FastAPI backend, including autonomous retraining after each race and WebSocket-based live telemetry. Reached AUC of 0.97/0.91/0.82 for win/podium/points-finish probability; exact finishing-position prediction is harder (~4-position MAE), a limitation surfaced directly in the app rather than hidden.",
     tags: ["Python", "FastAPI", "scikit-learn", "WebSocket"],
     stats: "0.97 AUC (Win)",
-    githubLink: "https://github.com/PrathibhaDevkar/F1-prediction"
+    githubLink: "https://github.com/PrathibhaDevkar/F1-prediction",
+    liveLink: "https://frontend-snowy-alpha-65.vercel.app"
   }
 ];
