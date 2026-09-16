@@ -9,6 +9,13 @@ export interface Project {
 
 export const project: Project[] = [
   {
+    title: "GlassBox",
+    description: "Built a real OpenTelemetry-based tracing SDK for multi-step AI agents — genuine spans on GenAI semantic conventions, a SQLite-backed store, and a waterfall viewer (React + FastAPI). Pointed it, unmodified, at a second project's real agent (RDT Transformer) to root-cause a tool-chaining failure that project had disclosed but never explained: on the second structured-generation attempt, the model doesn't malform its JSON, it collapses into answer-shaped text with no braces at all. Also built a failure classifier reusing confidence-referee's grounding signal unmodified — a third domain — honestly reporting its current 33% recall rather than inflating it.",
+    tags: ["Python", "OpenTelemetry", "React", "FastAPI"],
+    stats: "Real OTel Tracing",
+    githubLink: "https://github.com/PrathibhaDevkar/glassbox"
+  },
+  {
     title: "Recurrent Depth Transformer (RDT)",
     description: "Implemented a Recurrent Depth Transformer from scratch in PyTorch, replacing stacked transformer layers with a single recurrently-looped block. Matched a parameter-matched GPT baseline's accuracy on multi-hop reasoning (1-5 hops) at 30-47% fewer parameters, then ran inference-time loop-scaling experiments (6/10/14 loops). Built a tool-calling agent on top of it, caught a misleading evaluation metric reporting 100% completion regardless of correctness, and rewrote the harness to report results honestly.",
     tags: ["Python", "PyTorch", "Transformers", "Evaluation"],
