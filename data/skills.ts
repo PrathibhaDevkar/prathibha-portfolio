@@ -9,7 +9,7 @@ export const skillCategories = [
   },
   {
     title: "AI / LLM",
-    skills: ["Ollama", "Prompt Engineering", "DistilBERT Fine-Tuning", "LLM Evaluation & Calibration"]
+    skills: ["Ollama", "Prompt Engineering", "DistilBERT Fine-Tuning", "LLM Evaluation & Calibration", "MCP (Model Context Protocol)"]
   },
   {
     title: "Backend / APIs",
@@ -21,7 +21,7 @@ export const skillCategories = [
   },
   {
     title: "Databases",
-    skills: ["SQL Server", "PostgreSQL", "MySQL"]
+    skills: ["SQL Server", "PostgreSQL", "MySQL", "SQLite"]
   },
   {
     title: "Cloud",
@@ -29,6 +29,6 @@ export const skillCategories = [
   },
   {
     title: "DevOps / Tools",
-    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker"]
+    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker", "OpenTelemetry"]
   }
 ];
