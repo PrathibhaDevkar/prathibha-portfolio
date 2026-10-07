@@ -1,15 +1,16 @@
+// Keep in sync with the SKILLS section of the resume PDFs in public/
 export const skillCategories = [
   {
     title: "Languages",
-    skills: ["Python", "TypeScript", "JavaScript", "C#"]
+    skills: ["Python", "TypeScript", "JavaScript", "C#", "SQL"]
   },
   {
     title: "Machine Learning",
-    skills: ["PyTorch", "TensorFlow", "Keras", "OpenCV", "NumPy", "Pandas", "CNN"]
+    skills: ["PyTorch", "TensorFlow", "Keras", "scikit-learn", "OpenCV", "NumPy", "Pandas"]
   },
   {
     title: "AI / LLM",
-    skills: ["Ollama", "Prompt Engineering", "DistilBERT Fine-Tuning", "LLM Evaluation & Calibration", "MCP (Model Context Protocol)"]
+    skills: ["Ollama", "LLM Evaluation", "Confidence Calibration", "DistilBERT Fine-Tuning", "Prompt Engineering", "MCP"]
   },
   {
     title: "Backend / APIs",
@@ -21,7 +22,7 @@ export const skillCategories = [
   },
   {
     title: "Databases",
-    skills: ["SQL Server", "PostgreSQL", "MySQL", "SQLite"]
+    skills: ["PostgreSQL", "MySQL"]
   },
   {
     title: "Cloud",
@@ -29,6 +30,6 @@ export const skillCategories = [
   },
   {
     title: "DevOps / Tools",
-    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker", "OpenTelemetry"]
+    skills: ["Docker", "Kubernetes", "OpenTelemetry", "Git/GitHub", "Azure DevOps", "Jira"]
   }
 ];

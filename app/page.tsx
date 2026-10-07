@@ -1,58 +1,42 @@
+"use client";
+import { MotionConfig } from "framer-motion";
 import Navbar from "../components/Navbar";
-import About from "../components/AboutMe";
-import ProjectCard from "../components/ProjectCard";
-import Skills from "../components/Skills";
-import Experience from "../components/Experience";
-import Publication from "../components/Publication";
-import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
-import AnimatedSection from "../components/AnimatedSection";
+import About from "../components/AboutMe";
+import Projects from "../components/Projects";
+import Skills from "../components/Skills";
+import Publication from "../components/Publication";
+import Experience from "../components/Experience";
 import ContactForm from "../components/ContactForm";
-import SectionHeading from "../components/SectionHeading";
-import { project } from "../data/projects";
+import Footer from "../components/Footer";
+import CommandPalette from "../components/CommandPalette";
+import CursorGlow from "../components/CursorGlow";
+import NeuralField from "../components/NeuralField";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-term-bg text-term-text selection:bg-term-accent-dim">
-      <Navbar />
-
-      <div className="max-w-7xl mx-auto px-8 pt-32">
+    // reducedMotion="user" makes every Framer animation respect the OS "reduce motion" setting
+    <MotionConfig reducedMotion="user">
+      {/* no background here: body paints the ink color, so the hero's aurora (z -10) can show through */}
+      <main className="relative min-h-screen overflow-x-clip text-fg">
+        <NeuralField />
+        <CursorGlow />
+        <Navbar />
+        <CommandPalette />
 
         <HeroSection />
 
-        <AnimatedSection>
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
           <About />
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.05}>
-          <section id="projects" className="my-24 scroll-mt-20">
-            <SectionHeading command="ls -la projects/" title="Selected Projects" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.map((p) => (
-                <ProjectCard key={p.title} project={p} />
-              ))}
-            </div>
-          </section>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.05}>
+          <Projects />
           <Skills />
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.05}>
           <Publication />
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.05}>
           <Experience />
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.05}>
           <ContactForm />
-        </AnimatedSection>
+        </div>
 
         <Footer />
-      </div>
-    </main>
+      </main>
+    </MotionConfig>
   );
 }

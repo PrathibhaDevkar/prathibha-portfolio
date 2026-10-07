@@ -1,86 +1,120 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Project } from "../data/projects";
+import { useSpotlight } from "./ui/useSpotlight";
+import { ArrowRightIcon, ExternalLinkIcon, GitHubIcon } from "./ui/icons";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  index,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  onOpen: () => void;
+}) {
+  const spotlight = useSpotlight<HTMLElement>();
+  // -0.5..0.5 across the card, springed so the tilt eases in and out
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [7, -7]), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-7, 7]), { stiffness: 200, damping: 20 });
+
+  const onMove = (e: React.PointerEvent<HTMLElement>) => {
+    spotlight(e);
+    if (e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const onLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
+
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      className="group relative rounded-xl border border-term-border bg-term-panel overflow-hidden flex flex-col hover:border-term-accent/40 transition-colors duration-300"
+      layout
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      style={{ perspective: 1000 }}
     >
-      <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-term-border bg-term-panel-2">
-        <span className="text-xs text-term-dim truncate">
-          ~/{project.title.toLowerCase().replace(/[^a-z0-9]+/g, "_")}
-        </span>
-        {project.stats && (
-          <span className="shrink-0 text-[10px] font-bold tracking-wider bg-term-accent-dim text-term-accent px-2 py-0.5 rounded border border-term-accent/30 uppercase">
-            {project.stats}
-          </span>
-        )}
-      </div>
+      <motion.article
+        onPointerMove={onMove}
+        onPointerLeave={onLeave}
+        onClick={onOpen}
+        style={{ rotateX, rotateY }}
+        className="spotlight group relative flex h-full cursor-pointer flex-col rounded-3xl border border-line bg-surface/80 p-7 backdrop-blur-sm transition-colors hover:border-line-strong"
+      >
+        <div className="flex items-start justify-between gap-4 mb-6">
+          <span className="font-mono text-xs text-dim">{String(index + 1).padStart(2, "0")}</span>
+          {project.stats && (
+            <span className="rounded-full border border-amber/30 bg-amber/10 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-amber">
+              {project.stats}
+            </span>
+          )}
+        </div>
 
-      <div className="relative z-10 flex flex-col h-full p-6">
-        <h3 className="text-lg font-bold text-term-text group-hover:text-term-accent transition-colors duration-300 mb-3">
+        <h3
+          className="font-display text-2xl md:text-[1.7rem] font-semibold tracking-tight text-fg leading-tight mb-3"
+        >
           {project.title}
         </h3>
 
-        <p className="text-term-muted text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-sm leading-relaxed text-muted line-clamp-3 mb-6 flex-grow">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag: string) => (
-            <span
-              key={tag}
-              className="text-[10px] font-bold text-term-green bg-term-green-dim px-2 py-1 rounded border border-term-green/20"
-            >
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {project.tags.map((tag) => (
+            <span key={tag} className="rounded-full border border-line bg-white/[0.03] px-2.5 py-1 text-[11px] text-muted">
               {tag}
             </span>
           ))}
         </div>
 
-        {(project.githubLink || project.liveLink) && (
-          <div className="flex gap-4 pt-4 border-t border-term-border text-xs">
+        <div className="flex items-center gap-4 border-t border-line pt-5 text-xs">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpen();
+            }}
+            className="inline-flex items-center gap-1.5 font-medium text-fg"
+          >
+            Read the story
+            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </button>
+          <span className="ml-auto flex items-center gap-3">
             {project.githubLink && (
               <a
                 href={project.githubLink}
                 target="_blank"
-                className="flex items-center gap-1.5 text-term-muted hover:text-term-accent transition-colors font-medium"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`${project.title} source on GitHub`}
+                className="text-muted transition-colors hover:text-fg"
               >
-                <GitHubIcon />
-                view code
+                <GitHubIcon className="w-4 h-4" />
               </a>
             )}
             {project.liveLink && (
               <a
                 href={project.liveLink}
                 target="_blank"
-                className="flex items-center gap-1.5 text-term-muted hover:text-term-accent transition-colors font-medium"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`${project.title} live demo`}
+                className="text-muted transition-colors hover:text-fg"
               >
-                <ExternalLinkIcon />
-                live demo
+                <ExternalLinkIcon className="w-4 h-4" />
               </a>
             )}
-          </div>
-        )}
-      </div>
+          </span>
+        </div>
+      </motion.article>
     </motion.div>
-  );
-}
-
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current" aria-hidden="true">
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
-    </svg>
-  );
-}
-
-function ExternalLinkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current fill-none" strokeWidth={2} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-    </svg>
   );
 }
