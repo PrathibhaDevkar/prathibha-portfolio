@@ -29,6 +29,6 @@ export const skillCategories = [
   },
   {
     title: "DevOps / Tools",
-    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker", "OpenTelemetry"]
+    skills: ["Azure DevOps", "Git/GitHub", "Jira", "Docker", "Kubernetes", "OpenTelemetry"]
   }
 ];

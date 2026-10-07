@@ -2,6 +2,8 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
+  /** Themes used by the project filter on the site */
+  categories?: string[];
   stats?: string;
   githubLink?: string;
   liveLink?: string;
@@ -12,6 +14,7 @@ export const project: Project[] = [
     title: "GlassBox",
     description: "Built a real OpenTelemetry-based tracing SDK for multi-step AI agents — genuine spans on GenAI semantic conventions, a SQLite-backed store, and a waterfall viewer (React + FastAPI). Pointed it, unmodified, at a second project's real agent (RDT Transformer) to root-cause a tool-chaining failure that project had disclosed but never explained: on the second structured-generation attempt, the model doesn't malform its JSON, it collapses into answer-shaped text with no braces at all. Also built a failure classifier reusing confidence-referee's grounding signal unmodified — a third domain — honestly reporting its current 33% recall rather than inflating it.",
     tags: ["Python", "OpenTelemetry", "React", "FastAPI"],
+    categories: ["LLMs & Agents", "Full-Stack"],
     stats: "Real OTel Tracing",
     githubLink: "https://github.com/PrathibhaDevkar/glassbox"
   },
@@ -19,6 +22,7 @@ export const project: Project[] = [
     title: "Recurrent Depth Transformer (RDT)",
     description: "Implemented a Recurrent Depth Transformer from scratch in PyTorch, replacing stacked transformer layers with a single recurrently-looped block. Matched a parameter-matched GPT baseline's accuracy on multi-hop reasoning (1-5 hops) at 30-47% fewer parameters, then ran inference-time loop-scaling experiments (6/10/14 loops). Built a tool-calling agent on top of it, caught a misleading evaluation metric reporting 100% completion regardless of correctness, and rewrote the harness to report results honestly.",
     tags: ["Python", "PyTorch", "Transformers", "Evaluation"],
+    categories: ["Deep Learning", "LLMs & Agents"],
     stats: "30-47% Fewer Params",
     githubLink: "https://github.com/PrathibhaDevkar/rdt_transformer"
   },
@@ -26,6 +30,7 @@ export const project: Project[] = [
     title: "Confidence-Aware Meeting Intelligence",
     description: "Built a meeting summarizer and action-item extractor that scores the reliability of each output instead of presenting everything with equal certainty. A local LLM (Ollama, llama3.2:3b) extracts summaries and action items, independently cross-checked by a fine-tuned DistilBERT classifier; a calibrated confidence score (logistic regression on quote-grounding, owner-attribution plausibility, cross-model agreement, and self-reported confidence) was trained on 228 hand-labeled examples. The confidence layer has since been extracted into a standalone, reusable package — see confidence-referee below.",
     tags: ["Python", "Ollama", "DistilBERT", "Streamlit"],
+    categories: ["LLMs & Agents", "Deep Learning", "Classical ML"],
     stats: "58% vs 16% Precision",
     githubLink: "https://github.com/PrathibhaDevkar/confidence-aware-meeting-intelligence"
   },
@@ -33,6 +38,7 @@ export const project: Project[] = [
     title: "confidence-referee",
     description: "Extracted the confidence-calibration layer out of the meeting-intelligence project into a standalone, reusable Python package: domain-agnostic signals (grounding, cross-model agreement, self-reported confidence, an optional domain validator) calibrated per-domain via logistic regression. Validated the abstraction actually generalizes — not just in theory — on a second, unrelated domain: RAG-answer hallucination detection on HaluEval, using one signal alone, completely unmodified.",
     tags: ["Python", "scikit-learn", "Library Design", "CI/CD"],
+    categories: ["LLMs & Agents", "Classical ML"],
     stats: "0.97 AUC, 2nd Domain",
     githubLink: "https://github.com/PrathibhaDevkar/confidence-referee"
   },
@@ -40,6 +46,7 @@ export const project: Project[] = [
     title: "Apex F1 Predictor",
     description: "Full-stack ML app forecasting Formula 1 race outcomes from historical race data (2023+) with a RandomForestClassifier and a FastAPI backend, including autonomous retraining after each race and WebSocket-based live telemetry. Reached AUC of 0.97/0.91/0.82 for win/podium/points-finish probability; exact finishing-position prediction is harder (~4-position MAE), a limitation surfaced directly in the app rather than hidden.",
     tags: ["Python", "FastAPI", "scikit-learn", "WebSocket"],
+    categories: ["Classical ML", "Full-Stack"],
     stats: "0.97 AUC (Win)",
     githubLink: "https://github.com/PrathibhaDevkar/F1-prediction",
     liveLink: "https://frontend-snowy-alpha-65.vercel.app"

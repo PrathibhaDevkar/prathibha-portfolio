@@ -2,8 +2,8 @@
 export const aboutMe = {
   title: "Software Engineer & MSCS Graduate",
   description: [
-    "I've spent the last four years building software that people actually use. Fixing the bugs that slip through, shipping the features that matter, and learning something new on almost every project. I care a lot about getting the details right.",
-    "I recently graduated with my Master's in Computer Science from UT Arlington, where I got to dig deeper into AI and machine learning, areas I've always been curious about. I've published research on using computer vision to help people who can't speak communicate through hand gestures, which is one of the projects I'm most proud of.",
-    "I'm currently a Research Assistant with UTA's SEAR Lab, building a real-time energy monitoring platform that pulls live telemetry from HVAC, water heater, and solar hardware APIs into a single dashboard. Outside of work and school, I'm the kind of person who gets genuinely excited about a tricky problem. I like understanding how things work under the hood, and I find the most satisfaction in building something that just works, reliably and without drama."
+    "I'm the kind of person who gets genuinely excited about a tricky problem. When something isn't working, I don't just want it fixed. I want to understand why. That curiosity is what pulled me into software in the first place, and four years in, I still learn something new on almost every project.",
+    "What keeps me going is the person on the other end. One of the things I'm proudest of is early research I did to help people who can't speak communicate through hand gestures. It taught me that the best work quietly makes someone's day a little easier, which is why I care so much about getting the small details right.",
+    "I'm based in Dallas, recently finished my Master's at UT Arlington, and I'm still at UTA as a Research Assistant. I'm happiest on teams that are honest about what's working and what isn't, where people help each other figure things out and nobody has to pretend to have all the answers."
   ]
 };

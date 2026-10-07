@@ -1,12 +1,24 @@
-export default function SectionHeading({ command, title }: { command: string; title: string }) {
+export default function SectionHeading({
+  index,
+  eyebrow,
+  title,
+  accent,
+}: {
+  index: string;
+  eyebrow: string;
+  title: string;
+  accent?: string;
+}) {
   return (
-    <div className="mb-10">
-      <p className="text-xs mb-2 font-mono text-term-dim">
-        <span className="text-term-green">$</span> {command}
+    <div className="mb-12 md:mb-16">
+      <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-dim mb-4">
+        <span className="text-cyan">{index}</span>
+        <span className="h-px w-10 bg-gradient-to-r from-cyan/60 to-transparent" />
+        {eyebrow}
       </p>
-      <h2 className="text-2xl md:text-3xl font-bold text-term-text flex items-center gap-4">
-        {title}
-        <span className="h-px bg-term-border grow" />
+      <h2 className="font-display text-4xl md:text-6xl font-semibold tracking-tight text-fg leading-[1.02]">
+        {title}{" "}
+        {accent && <span className="font-serif italic font-normal text-gradient pr-2">{accent}</span>}
       </h2>
     </div>
   );

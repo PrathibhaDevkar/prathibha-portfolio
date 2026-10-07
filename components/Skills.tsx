@@ -1,46 +1,116 @@
 "use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { skillCategories } from "../data/skills";
 import SectionHeading from "./SectionHeading";
+import SkillGraph from "./SkillGraph";
+
+const allSkills = skillCategories.flatMap((c) => c.skills);
+const half = Math.ceil(allSkills.length / 2);
+const rowA = allSkills.slice(0, half);
+const rowB = allSkills.slice(half);
+
+function MarqueeRow({ items, reverse }: { items: string[]; reverse?: boolean }) {
+  return (
+    <div className="mask-fade-x flex overflow-hidden py-2 [&:hover>div]:[animation-play-state:paused]">
+      <div className={`flex shrink-0 gap-3 pr-3 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {[...items, ...items].map((s, i) => (
+          <span
+            key={`${s}-${i}`}
+            aria-hidden={i >= items.length}
+            className="whitespace-nowrap rounded-full border border-line bg-surface px-5 py-2.5 font-display text-lg text-muted transition-colors hover:border-violet/50 hover:text-fg"
+          >
+            {s}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [active, setActive] = useState(0);
+  const current = skillCategories[active];
 
   return (
-    <section id="skills" className="my-20 scroll-mt-20" ref={ref}>
-      <SectionHeading command="cat skills.json" title="Technical Skills" />
+    <section id="skills" className="scroll-mt-24 py-24 md:py-32">
+      <SectionHeading index="03" eyebrow="Toolbox" title="The stack I" accent="reach for." />
 
-      <div className="rounded-xl border border-term-border bg-term-panel p-6 md:p-8">
-        <p className="text-term-dim text-sm mb-5">{"{"}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pl-4">
-          {skillCategories.map((cat, catIndex) => (
-            <div key={cat.title}>
-              <h3 className="text-term-accent font-bold mb-3 text-xs">
-                &quot;{cat.title}&quot;:
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill, skillIndex) => (
+      <div className="-mx-5 sm:-mx-8 mb-14 space-y-2">
+        <MarqueeRow items={rowA} />
+        <MarqueeRow items={rowB} reverse />
+      </div>
+
+      {/* Large screens: draggable graph. Smaller screens: tabs (dragging tiny nodes by finger is fiddly). */}
+      <div className="relative hidden lg:block h-[620px] overflow-hidden rounded-3xl border border-line bg-surface/60 backdrop-blur-sm">
+        <SkillGraph />
+        <p className="pointer-events-none absolute left-6 top-5 font-mono text-[11px] text-dim">
+          hover a cluster · drag any node
+        </p>
+        <ul className="sr-only">
+          {skillCategories.map((cat) => (
+            <li key={cat.title}>
+              {cat.title}: {cat.skills.join(", ")}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,280px)_1fr] gap-4 lg:hidden">
+        <div role="tablist" aria-label="Skill categories" className="flex md:flex-col gap-1 overflow-x-auto pb-2 md:pb-0 -mx-1 px-1">
+          {skillCategories.map((cat, i) => (
+            <button
+              key={cat.title}
+              role="tab"
+              aria-selected={active === i}
+              onClick={() => setActive(i)}
+              onPointerEnter={(e) => e.pointerType === "mouse" && setActive(i)}
+              className={`relative shrink-0 flex items-center justify-between gap-4 rounded-2xl px-4 py-3 text-left text-sm transition-colors ${
+                active === i ? "text-fg" : "text-muted hover:text-fg"
+              }`}
+            >
+              {active === i && (
+                <motion.span
+                  layoutId="skill-tab"
+                  className="absolute inset-0 -z-10 rounded-2xl border border-line-strong bg-surface-2"
+                  transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                />
+              )}
+              <span className="whitespace-nowrap">{cat.title}</span>
+              <span className="hidden md:inline font-mono text-xs text-dim">{String(cat.skills.length).padStart(2, "0")}</span>
+            </button>
+          ))}
+        </div>
+
+        <div role="tabpanel" className="relative min-h-[260px] overflow-hidden rounded-3xl border border-line bg-surface/80 p-7 md:p-10">
+          <div aria-hidden="true" className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-violet/15 blur-3xl" />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.title}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="relative"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-dim mb-6">{current.title}</p>
+              <div className="flex flex-wrap gap-3">
+                {current.skills.map((s, i) => (
                   <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      duration: 0.35,
-                      delay: catIndex * 0.06 + skillIndex * 0.04,
-                      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-                    }}
-                    className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-term-panel-2 text-term-muted border border-term-border hover:border-term-green/50 hover:text-term-green transition-all cursor-default"
+                    key={s}
+                    initial={{ opacity: 0, y: 14, scale: 0.92 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: i * 0.04, type: "spring", stiffness: 300, damping: 22 }}
+                    whileHover={{ y: -3 }}
+                    className="cursor-default rounded-2xl border border-line-strong bg-white/[0.03] px-5 py-3 font-display text-xl md:text-2xl text-fg hover:border-cyan/50 hover:text-cyan transition-colors"
                   >
-                    {skill}
+                    {s}
                   </motion.span>
                 ))}
               </div>
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
-        <p className="text-term-dim text-sm mt-5">{"}"}</p>
       </div>
     </section>
   );
