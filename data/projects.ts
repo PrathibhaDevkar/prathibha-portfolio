@@ -31,7 +31,7 @@ export const project: Project[] = [
     description: "Built a meeting summarizer and action-item extractor that scores the reliability of each output instead of presenting everything with equal certainty. A local LLM (Ollama, llama3.2:3b) extracts summaries and action items, independently cross-checked by a fine-tuned DistilBERT classifier; a calibrated confidence score (logistic regression on quote-grounding, owner-attribution plausibility, cross-model agreement, and self-reported confidence) was trained on 228 hand-labeled examples. The confidence layer has since been extracted into a standalone, reusable package — see confidence-referee below.",
     tags: ["Python", "Ollama", "DistilBERT", "Streamlit"],
     categories: ["LLMs & Agents", "Deep Learning", "Classical ML"],
-    stats: "58% vs 16% Precision",
+    stats: "58% vs 35% Precision",
     githubLink: "https://github.com/PrathibhaDevkar/confidence-aware-meeting-intelligence"
   },
   {
