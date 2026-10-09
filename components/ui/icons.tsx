@@ -47,5 +47,4 @@ export const HashIcon = (p: IconProps) => <Stroke {...p} d="M5.25 8.25h15m-16.5 
 export const PinIcon = (p: IconProps) => (
   <Stroke {...p} d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
 );
-export const ChevronDownIcon = (p: IconProps) => <Stroke {...p} d="m19.5 8.25-7.5 7.5-7.5-7.5" />;
 export const CheckIcon = (p: IconProps) => <Stroke {...p} d="m4.5 12.75 6 6 9-13.5" />;
