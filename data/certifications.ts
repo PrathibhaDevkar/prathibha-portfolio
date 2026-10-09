@@ -42,4 +42,10 @@ export const certifications: Certification[] = [
       },
     ],
   },
+  {
+    title: "Software Engineering Job Simulation",
+    issuer: "Hewlett Packard Enterprise · Forage",
+    date: "Apr 2025",
+    link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/fgHAi6dLhpRsGKyyN/da2T3WZCbMAJD7bNB_fgHAi6dLhpRsGKyyN_evJobJ2M3kzPG3wZW_1744065380307_completion_certificate.pdf",
+  },
 ];
