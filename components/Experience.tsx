@@ -1,13 +1,16 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { experiences } from "../data/experience";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { experiences, internships } from "../data/experience";
 import SectionHeading from "./SectionHeading";
 import { useSpotlight } from "./ui/useSpotlight";
+import { certifications } from "../data/certifications";
+import { CheckIcon, ChevronDownIcon } from "./ui/icons";
 
 export default function Experience() {
   const listRef = useRef<HTMLOListElement>(null);
   const onMove = useSpotlight<HTMLDivElement>();
+  const [showInternships, setShowInternships] = useState(false);
   // 0 when the list's top hits mid-screen, 1 when its bottom does — drives the line "drawing" itself.
   const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 60%", "end 60%"] });
   const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
@@ -70,10 +73,95 @@ export default function Experience() {
                   </li>
                 ))}
               </ul>
+              {"recognition" in exp && exp.recognition && (
+                <p className="mt-6 flex items-start gap-3 rounded-2xl border border-amber/20 bg-amber/[0.06] px-4 py-3 text-sm leading-relaxed text-fg">
+                  <span aria-hidden="true">🏆</span>
+                  {exp.recognition}
+                </p>
+              )}
             </div>
           </motion.li>
         ))}
       </ol>
+
+      <div className="mt-16 space-y-4 pl-8 md:pl-12">
+        {certifications.map((c) => (
+          <div
+            key={c.title}
+            onPointerMove={onMove}
+            className="spotlight flex flex-col gap-4 rounded-3xl border border-line bg-surface/80 p-6 backdrop-blur-sm transition-colors hover:border-line-strong md:flex-row md:items-center"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-violet md:w-28 md:shrink-0">
+              Certification
+            </span>
+            <div className="flex-1">
+              <h3 className="font-display text-lg font-semibold text-fg">{c.title}</h3>
+              <p className="text-sm text-muted">
+                {c.issuer} · {c.date}
+                {c.courses && <span className="text-dim"> · {c.courses.length} courses</span>}
+              </p>
+            </div>
+            {c.link && (
+              <a
+                href={c.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 self-start rounded-full border border-line px-3 py-1.5 text-xs text-muted transition-colors hover:border-cyan/50 hover:text-cyan md:self-auto"
+              >
+                <CheckIcon className="w-3.5 h-3.5" />
+                Verify
+              </a>
+            )}
+          </div>
+        ))}
+
+        {/* Undergrad internships stay one click away instead of competing with the main roles */}
+        <div id="internships" className="scroll-mt-24 rounded-3xl border border-line bg-surface/60 backdrop-blur-sm">
+          <button
+            type="button"
+            onClick={() => setShowInternships((v) => !v)}
+            aria-expanded={showInternships}
+            aria-controls="internship-list"
+            className="flex w-full items-center gap-4 p-6 text-left"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber md:w-28 md:shrink-0">
+              2016 – 2018
+            </span>
+            <span className="flex-1 text-sm text-muted">
+              <span className="text-fg font-medium">+{internships.length} undergrad internships</span>{" "}
+              <span className="hidden sm:inline">· {internships.map((it) => it.company).join(", ")}</span>
+            </span>
+            <motion.span animate={{ rotate: showInternships ? 180 : 0 }} className="text-dim">
+              <ChevronDownIcon className="w-4 h-4" />
+            </motion.span>
+          </button>
+          <AnimatePresence initial={false}>
+            {showInternships && (
+              <motion.div
+                id="internship-list"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <ul className="grid grid-cols-1 gap-x-8 gap-y-5 border-t border-line p-6 md:grid-cols-2">
+                  {internships.map((it) => (
+                    <li key={it.company}>
+                      <p className="font-mono text-[11px] text-amber mb-1">{it.period}</p>
+                      <p className="font-medium text-fg">{it.role}</p>
+                      <p className="text-sm text-muted mb-1.5">
+                        {it.company} <span className="text-dim">· {it.location}</span>
+                      </p>
+                      <p className="text-sm leading-relaxed text-dim">{it.summary}</p>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </section>
   );
 }
