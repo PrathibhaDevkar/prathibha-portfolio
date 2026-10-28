@@ -20,10 +20,10 @@ export const project: Project[] = [
   },
   {
     title: "Recurrent Depth Transformer (RDT)",
-    description: "Implemented a Recurrent Depth Transformer from scratch in PyTorch, replacing stacked transformer layers with a single recurrently-looped block. Matched a parameter-matched GPT baseline's accuracy on multi-hop reasoning (1-5 hops) at 30-47% fewer parameters, then ran inference-time loop-scaling experiments (6/10/14 loops). Built a tool-calling agent on top of it, caught a misleading evaluation metric reporting 100% completion regardless of correctness, and rewrote the harness to report results honestly.",
+    description: "Implemented a Recurrent Depth Transformer from scratch in PyTorch, replacing stacked transformer layers with a single recurrently-looped block. Matched a 6-layer GPT baseline's multi-hop accuracy (1-5 hops) with ~47% fewer parameters; running extra loops at inference (6/10/14) did not extend accuracy past the trained depths. Built a tool-calling agent on top of it, caught a misleading evaluation metric reporting 100% completion regardless of correctness, and rewrote the harness to report results honestly.",
     tags: ["Python", "PyTorch", "Transformers", "Evaluation"],
     categories: ["Deep Learning", "LLMs & Agents"],
-    stats: "30-47% Fewer Params",
+    stats: "~47% Fewer Params",
     githubLink: "https://github.com/PrathibhaDevkar/rdt_transformer"
   },
   {
@@ -44,7 +44,7 @@ export const project: Project[] = [
   },
   {
     title: "Apex F1 Predictor",
-    description: "Full-stack ML app forecasting Formula 1 race outcomes from historical race data (2023+) with a RandomForestClassifier and a FastAPI backend, including autonomous retraining after each race and WebSocket-based live telemetry. Reached AUC of 0.97/0.91/0.82 for win/podium/points-finish probability; exact finishing-position prediction is harder (~4-position MAE), a limitation surfaced directly in the app rather than hidden.",
+    description: "Full-stack ML app forecasting Formula 1 race outcomes from historical race data (2023+) with a RandomForestClassifier and a FastAPI backend, including autonomous retraining after each race and WebSocket-based live telemetry. Reached AUC of 0.97/0.94/0.84 for win/podium/points-finish probability on a chronological hold-out of the most recent races; exact finishing-position prediction is harder (~3.6-position MAE), a limitation surfaced directly in the app rather than hidden.",
     tags: ["Python", "FastAPI", "scikit-learn", "WebSocket"],
     categories: ["Classical ML", "Full-Stack"],
     stats: "0.97 AUC (Win)",

@@ -7,7 +7,7 @@ export const experiences = [
     location: "Arlington, TX",
     description: [
       "Refactored a 6-service Docker stack (Mosquitto MQTT, InfluxDB, Grafana, a FastAPI Data Hub, Python collectors) into a single self-contained FastAPI application with an embedded dashboard, eliminating the Docker/Grafana/MQTT infrastructure dependency entirely.",
-      "Integrated live telemetry from three hardware APIs — LG ThinQ (AC), Rheem EcoNet (water heater), and Enphase (solar) — into a unified REST API computing a real-time Net Load metric (solar minus HVAC/HWH draw), via a background asyncio collector refreshing every 60 seconds."
+      "Integrated live telemetry from three hardware APIs — LG ThinQ (AC), Rheem EcoNet (water heater), and Enphase (solar) — into a unified REST API refreshed every 60 seconds by a background asyncio collector, behind a dashboard that charts real-time net load (solar minus HVAC/HWH draw)."
     ]
   },
   {
